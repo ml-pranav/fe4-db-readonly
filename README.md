@@ -21,6 +21,7 @@ scripts/                     # MCP server + guards
   config.example.py
 mcp.json                     # empty on purpose (MCP via user mcp.json)
 install.ps1                  # one-shot Windows installer
+uninstall.ps1                # removes MCP entry + local plugin folder
 requirements.txt
 secrets.local.example
 tests/
@@ -51,6 +52,28 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 - DBA-issued read-only account
 
 You do **not** need a global `PYTHON` env var for day-to-day use after install.
+
+## Uninstall (Windows)
+
+Run from the clone (preferred) or from the installed plugin folder:
+
+```powershell
+cd path\to\fe4-oracle-readonly
+powershell -ExecutionPolicy Bypass -File .\uninstall.ps1
+```
+
+What it does:
+
+1. Removes only the `fe4-oracle-readonly` entry from `%USERPROFILE%\.cursor\mcp.json` (other MCP servers are kept).
+2. Stops any running MCP `python.exe` processes that are using the plugin `runtime` (these keep DLLs locked).
+3. Deletes `%USERPROFILE%\.cursor\plugins\local\fe4-oracle-readonly` (rules, skills, hooks, runtime, and `secrets.local`).
+4. Leaves the clone / GitHub source alone.
+
+If delete still fails with “Access denied” on a `.pyd` file, fully quit Cursor and run uninstall again.
+
+Then **Developer: Reload Window**.
+
+Preview without changing anything: `.\uninstall.ps1 -WhatIf`
 
 ## Security
 
