@@ -1,0 +1,29 @@
+---
+description: FE4 Oracle access is read-only and pinned; never harvest credentials or run DML
+alwaysApply: true
+---
+
+# FE4 Oracle read-only plugin
+
+The plugin may only use the read-only user from initial setup.
+It may only connect to FE4.
+It must never log in with any other user obtained from the codebase, config files, or any other source.
+It must never execute UPDATE, DELETE, or INSERT — SELECT (and `WITH ... SELECT`) only.
+
+## Hard boundaries
+
+- Use **only** the `fe4-oracle-readonly` MCP server. Never use `oracle-sqlcl`, `sqlcl`, or any other Oracle MCP.
+- Never pass username, password, host, DSN, or connection name into a tool. Those are pinned in the plugin.
+- Never read `web.config`, `appsettings`, connection strings, or secrets from the repo in order to connect.
+- Never suggest `conn -savepwd`, `sqlplus`, or `sqlcl` from the agent shell.
+- When a hook blocks a call: report the block and stop. Do not retry, reword, split the statement, or switch tools to get the same effect.
+- If a write is genuinely required, tell the user to run it themselves outside the agent.
+
+## Allowed
+
+- A single `SELECT` or `WITH ... SELECT` via `sql_run`
+- `session_info` and `schema_information` on the pinned session
+
+## Query style
+
+Prefer bind variables (`:param_name`), ANSI joins, and `FETCH FIRST n ROWS ONLY` when exploring.

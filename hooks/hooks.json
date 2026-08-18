@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeMCPExecution": [
+      {
+        "command": "scripts/run_mcp_hook.cmd",
+        "timeout": 15,
+        "failClosed": true
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "scripts/run_shell_guard.cmd",
+        "timeout": 15,
+        "failClosed": true
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "scripts/run_pre_tool_guard.cmd",
+        "timeout": 15,
+        "failClosed": true
+      }
+    ]
+  }
+}

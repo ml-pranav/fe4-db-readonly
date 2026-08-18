@@ -1,0 +1,13 @@
+{
+  "name": "fe4-oracle-readonly",
+  "displayName": "FE4 Oracle Read-Only",
+  "version": "1.2.0",
+  "description": "Pinned FE4 Oracle read-only access for Cursor: SELECT-only MCP, fail-closed hooks, always-apply rule, and skill.",
+  "author": {
+    "name": "FE4 Platform"
+  },
+  "keywords": ["oracle", "fe4", "readonly", "mcp", "sql"],
+  "hooks": "./hooks/hooks.json",
+  "rules": "./rules/",
+  "skills": "./skills/"
+}

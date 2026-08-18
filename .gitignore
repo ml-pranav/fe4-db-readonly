@@ -1,0 +1,14 @@
+scripts/__pycache__/
+tests/__pycache__/
+**/__pycache__/
+*.pyc
+fe4-oracle-guard.log
+.env
+*.local
+secrets.local
+_mcp_err.txt
+_mcp_out.txt
+runtime/
+.venv/
+.cursor/
+*.log
