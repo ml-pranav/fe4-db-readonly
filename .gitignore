@@ -1,14 +1,13 @@
-scripts/__pycache__/
-tests/__pycache__/
+# Shared ignores for both plugins under this monorepo
 **/__pycache__/
 *.pyc
-fe4-oracle-guard.log
+*.log
 .env
 *.local
 secrets.local
+fe4-oracle-guard.log
 _mcp_err.txt
 _mcp_out.txt
 runtime/
 .venv/
 .cursor/
-*.log
